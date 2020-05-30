@@ -16,4 +16,7 @@ tr.purple{
   background-color:purple;
   font-size:120%;
 }
-
+li.sized{
+  font-size:70%;
+  font-style:oblique;
+}

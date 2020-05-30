@@ -1,5 +1,9 @@
 var dati = new Array();
-var titStudio = ["No titoli","Licenza elem.","Licenza media","Diploma","Laurea"];
+var titStudio = ["Analfabeta","Licenza elem.","Licenza media","Diploma","Laurea"];
+var titStudioval = ["0","0","0","0","0"];
+var mOrF = ["0","0"]
+var show = false;
+var execute = true;
 
 function caricaDati()
 {
@@ -72,3 +76,86 @@ function visualizzaDati()
 	}
 	tab.appendChild(tabella);
 }
+
+function details(){
+  if(!show){
+    if(execute){
+      for(var i in dati){
+        for(var x in dati[i]){
+          if(x == "Sesso"){
+            if(dati[i][x] == "F"){
+              mOrF[1]++;
+            }
+            else{
+              mOrF[0]++;
+            }
+          }
+        }
+      }
+
+      for(var i in dati){
+        for(var x in dati[i]){
+          if(x == "Titolo"){
+            switch(dati[i][x]){
+              case 0:
+                titStudioval[0]++;
+                break;
+              case 1:
+                titStudioval[1]++;
+                break;
+              case 2:
+                titStudioval[2]++;
+                break;
+              case 3:
+                titStudioval[3]++;
+                break;
+              case 4:
+                titStudioval[4]++;
+                break;
+              default:
+                break;
+            }
+          }
+        }
+      }
+      execute = !execute;
+    }
+    listat = document.createElement("ul");
+    listas = document.createElement("ul");
+    intest = document.createElement("h2");
+    intest1 = document.createElement("h2");
+
+    intest.textContent = "Titoli di Studio:";
+    intest1.textContent = "Maschi e Femmine:";
+
+    for(var i in titStudio){
+      li = document.createElement("li");
+      li.textContent = titStudio[i]+": "+titStudioval[i];
+      intest.appendChild(li);
+      li.className="sized";
+    }
+
+      lif = document.createElement("li");
+      lif.textContent = "Femmine: "+mOrF[1];
+      lif.className="sized";
+
+      lim = document.createElement("li");
+      lim.textContent = "Maschi: "+mOrF[0];
+      lim.className="sized";
+
+      listat.appendChild(intest);
+      listas.appendChild(intest1);
+      intest1.appendChild(lif);
+      intest1.appendChild(lim);
+      var dati2 = document.getElementById("dati2");
+
+      dati2.appendChild(listat);
+      dati2.appendChild(listas);
+
+      show = !show;
+    }else{
+      document.getElementById("dati2").innerHTML = "";
+      show = !show;
+    }
+}
+  
